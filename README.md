@@ -125,3 +125,47 @@ def test_no_such_element_exception(self, driver):
 - **WebDriverWait**: Waits up to 10 seconds for the second row input field to appear.
 
 - **assert**: Verifies that the input field is displayed.
+
+#### 2. test_element_not_interactable_exception
+The `test_element_not_interactable_exception` function ensures the correct handling of `ElementNotInteractableException`. It navigates to the practice test page, clicks an "Add" button, types text into the second row input field, and verifies the confirmation message after saving.
+
+```python
+@pytest.mark.exceptions
+@pytest.mark.element_not_interactable_exception
+def test_element_not_interactable_exception(self, driver):
+    # Navigate to web page
+    driver.get("https://practicetestautomation.com/practice-test-exceptions/")
+
+    # Click Add button
+    add_button_locator = driver.find_element(By.ID, "add_btn")
+    add_button_locator.click()
+
+    # Wait for the second row to load
+    wait = WebDriverWait(driver, 10)
+    row2_input_field_element = wait.until(expected_conditions.presence_of_element_located((By.XPATH, "//div[@id='row2']/input")))
+    # Type text into the second input field
+    row2_input_field_element.send_keys("Beef")
+
+    # Push Save button
+    save_button_locator = driver.find_element(By.XPATH, "(//button[@id='save_btn'])[2]")
+    save_button_locator.click()
+
+    # Verify text saved
+    text_saved_locator = driver.find_element(By.ID, "confirmation")
+    confirmation_text = text_saved_locator.text
+    assert confirmation_text == "Row 2 was saved", "Confirmation text should appear but it's not"
+```
+
+*Explanation*:
+
+- **driver.get()**: Opens the specified URL in the web browser.
+
+- **driver.find_element()**: Locates the "Add" button by its ID and clicks it.
+
+- **WebDriverWait**: Waits up to 10 seconds for the second row input field to appear.
+
+- **send_keys()**: Types the text "Beef" into the input field.
+
+- **driver.find_element()**: Locates the "Save" button by its XPath and clicks it.
+
+- **assert**: Verifies that the confirmation text "Row 2 was saved" appears.
