@@ -69,19 +69,59 @@ def driver():
 #### Summary
 The `conftest.py` file contains a crucial fixture for setting up and tearing down the Selenium WebDriver for Microsoft Edge. By managing the WebDriver lifecycle, this fixture ensures that tests can run smoothly and resources are properly managed. It simplifies test setup and teardown, making the testing process more efficient and reliable.
 
+### Exception Handling Scenarios
+This file is responsible for testing various exceptions that might occur during web interactions using the `pytest` framework and `selenium` for automation. Each test case targets a specific exception, ensuring that the web application handles these scenarios gracefully.
 
+- **File**: [test_exceptions.py](link)
 
+#### Imports
 
+```python
+import pytest
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+```
 
+*Explanation*:
 
+- **pytest**: The main testing framework used to write and run the test cases.
 
+- **By**: A module from `selenium.webdriver.common` that provides various locators to find web elements.
 
+- **expected_conditions**: A module from `selenium.webdriver.support` that provides a set of predefined conditions to wait for during testing.
 
+- **WebDriverWait**: A module from `selenium.webdriver.support.wait` that is used to set up explicit waits for conditions to be met before proceeding with the next step.
 
+#### Test Class: TestExceptions
+The `TestExceptions` class contains multiple test methods, each designed to handle and verify a specific exception in the web application.
 
+#### 1. test_no_such_element_exception
+The `test_no_such_element_exception` function verifies that the `NoSuchElementException` is handled correctly. It navigates to the practice test page, clicks an "Add" button, and waits for the second row input field to be displayed.
 
+```python
+@pytest.mark.exceptions
+@pytest.mark.no_such_element
+def test_no_such_element_exception(self, driver):
+    # Navigate to web page
+    driver.get("https://practicetestautomation.com/practice-test-exceptions/")
 
+    # Click Add button
+    add_button_locator = driver.find_element(By.ID, "add_btn")
+    add_button_locator.click()
 
+    wait = WebDriverWait(driver, 10)
+    row2_input_field_element = wait.until(expected_conditions.presence_of_element_located((By.XPATH, "//div[@id='row2']/input")))
+    # Verify Row 2 input field is displayed
+    assert row2_input_field_element.is_displayed(), "Row 2 input field should be displayed but it's not"
+```
 
+*Explanation*:
 
+- **driver.get()**: Opens the specified URL in the web browser.
 
+- **driver.find_element()**: Locates the "Add" button by its ID and clicks it.
+
+- **WebDriverWait**: Waits up to 10 seconds for the second row input field to appear.
+
+- **assert**: Verifies that the input field is displayed.
