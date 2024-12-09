@@ -169,3 +169,52 @@ def test_element_not_interactable_exception(self, driver):
 - **driver.find_element()**: Locates the "Save" button by its XPath and clicks it.
 
 - **assert**: Verifies that the confirmation text "Row 2 was saved" appears.
+
+#### 3. test_invalid_element_state_exception
+The `test_invalid_element_state_exception` function verifies the handling of `InvalidElementStateException`. It navigates to the practice test page, clicks the "Edit" button to clear an input field, types new text, and verifies the confirmation message after saving.
+
+```python
+@pytest.mark.exceptions
+@pytest.mark.invalid_element_state_exception
+def test_invalid_element_state_exception(self, driver):
+    # Open page
+    driver.get("https://practicetestautomation.com/practice-test-exceptions/")
+
+    # Clear input field
+    edit_button_locator = driver.find_element(By.ID, "edit_btn")
+    edit_button_locator.click()
+    row1_input_field_locator = driver.find_element(By.XPATH, "//input[@class='input-field']")
+    wait = WebDriverWait(driver, 10)
+    wait.until(expected_conditions.element_to_be_clickable(row1_input_field_locator))
+    row1_input_field_locator.clear()
+
+    # Type text into the input field
+    row1_input_field_locator.send_keys("Souvlaki")
+
+    # Verify text changed
+    save_button_locator = driver.find_element(By.ID, "save_btn")
+    save_button_locator.click()
+    wait = WebDriverWait(driver, 10)
+    confirmation_element = wait.until(expected_conditions.visibility_of_element_located((By.ID, "confirmation")))
+
+    actual_confirmation_text = confirmation_element.text
+    assert actual_confirmation_text == "Row 1 was saved", "Confirmation text does not apply"
+```
+
+*Explanation*:
+
+- **driver.get()**: Opens the specified URL in the web browser.
+
+- **driver.find_element()**: Locates the "Edit" button by its ID and clicks it.
+
+- **WebDriverWait**: Waits up to 10 seconds for the first row input field to be clickable.
+
+- **clear()**: Clears the existing text in the input field.
+
+- **send_keys()**: Types the text "Souvlaki" into the input field.
+
+- **driver.find_element()**: Locates the "Save" button by its ID and clicks it.
+
+- **WebDriverWait**: Waits for the confirmation element to be visible.
+
+- **assert**: Verifies that the confirmation text "Row 1 was saved" appears.
