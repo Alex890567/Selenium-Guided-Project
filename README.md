@@ -32,6 +32,8 @@ This repository provides a comprehensive guided tutorial on using Selenium with 
 ### Conftest File
 The `conftest.py` file contains a pytest fixture for setting up and tearing down the Selenium WebDriver for Microsoft Edge. This fixture ensures that tests can run smoothly by managing the WebDriver lifecycle.
 
+- **File**: [conftest.py](https://github.com/Alex890567/Selenium-Guided-Project/blob/main/Tests/conftest.py)
+
 ```python
 import pytest
 from selenium import webdriver
@@ -72,7 +74,7 @@ The `conftest.py` file contains a crucial fixture for setting up and tearing dow
 ### Exception Handling Scenarios
 This file is responsible for testing various exceptions that might occur during web interactions using the `pytest` framework and `selenium` for automation. Each test case targets a specific exception, ensuring that the web application handles these scenarios gracefully.
 
-- **File**: [test_exceptions.py](link)
+- **File**: [test_exceptions.py](https://github.com/Alex890567/Selenium-Guided-Project/blob/main/Tests/test_exceptions.py)
 
 #### Imports
 
@@ -292,6 +294,8 @@ The `TestExceptions` class contains a series of tests designed to handle and ver
 ### Positive Login Scenarios
 This file contains test cases to validate the positive login functionality of a web application using Selenium WebDriver and pytest. It verifies that a user can successfully log in with valid credentials and checks the presence of expected elements on the post-login page.
 
+- **File**: [test_login_page.py](https://github.com/Alex890567/Selenium-Guided-Project/blob/main/Tests/test_login_page.py)
+
 #### Imports
 
 ```python
@@ -370,6 +374,8 @@ The `TestPositiveLogin` class ensures that the login functionality of the web ap
 
 ### Negative Login Scenarios
 This file contains test cases to validate the negative login scenarios of a web application using Selenium WebDriver and pytest. It verifies that the application correctly handles invalid login attempts with incorrect usernames and passwords, displaying appropriate error messages.
+
+- **File**: [test_login_page_Negative.py](https://github.com/Alex890567/Selenium-Guided-Project/blob/main/Tests/test_login_page_Negative.py)
 
 #### Imports
 
@@ -527,10 +533,12 @@ def test_negative_password(self, driver):
 #### Summary
 The `TestNegativeScenarios` class ensures that the login functionality of the web application correctly handles invalid credentials. The tests verify the correct display of error messages for both invalid usernames and passwords, ensuring that the application's login process is robust and provides appropriate feedback for invalid attempts.
 
-### Math Functions
+## Math Functions
 This file contains test cases to validate a simple arithmetic function that adds two numbers using pytest. It ensures that the function works correctly for both small and large numbers.
 
-#### Imports
+- **File**: [test_math.py](https://github.com/Alex890567/Selenium-Guided-Project/blob/main/Tests/test_math.py)
+
+### Imports
 
 ```python
 import pytest
@@ -540,7 +548,7 @@ import pytest
 
 - **import pytest**: The pytest framework is used for writing and running the test cases. It provides decorators and utilities to simplify testing.
 
-#### Function: add_two_numbers
+### Function: add_two_numbers
 The `add_two_numbers` function takes two arguments, `a` and `b`, and returns their sum.
 
 ```python
@@ -548,7 +556,7 @@ def add_two_numbers(a, b):
     return a + b
 ```
 
-#### 1. test_small_numbers
+### 1. test_small_numbers
 The `test_small_numbers` function verifies that the `add_two_numbers` function correctly adds small numbers.
 
 ```python
@@ -561,7 +569,7 @@ def test_small_numbers():
 
 - **assert**: Checks that the sum of 1 and 2 equals 3 and raises an error if the condition is not met.
 
-#### 2. test_large_numbers
+### 2. test_large_numbers
 The `test_large_numbers` function verifies that the `add_two_numbers` function correctly adds large numbers.
 
 ```python
@@ -574,7 +582,7 @@ def test_large_numbers():
 
 - **assert**: Checks that the sum of 100 and 200 equals 300 and raises an error if the condition is not met.
 
-#### Summary
+### Summary
 This file contains a simple but crucial validation of the `add_two_numbers` function. The tests verify the correctness of the function for both small and large numbers, ensuring that it performs accurately under different conditions.
 
 ## Testing Markers Configuration
