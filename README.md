@@ -577,14 +577,49 @@ def test_large_numbers():
 #### Summary
 This file contains a simple but crucial validation of the `add_two_numbers` function. The tests verify the correctness of the function for both small and large numbers, ensuring that it performs accurately under different conditions.
 
-### Testing Markers Configuration
+## Testing Markers Configuration
 The .ini file is used to configure and provide descriptions for all the markers utilized in the testing files. These markers help in organizing, categorizing, and selectively running tests based on specific criteria.
 
-#### Purpose of the .ini File
+### Purpose of the .ini File
 
 - **Define Markers**: Specifies and describes each marker used in the testing files.
 
 - **Improve Test Management**: Enhances the organization and readability of tests by providing clear descriptions.
 
 - **Selective Test Execution**: Allows running specific groups of tests based on the markers defined.
+
+## Running the Tests
+Instructions on how to set and run the tests
+
+### Prerequisites
+1. **Clone the Repository**: 
+     - Clone the repository to your local machine:
+       ```bash 
+       git clone (link)
+       ```
+     - Navigate to the Repository Directory:
+       ```bash
+        cd directory
+       ```
+2. **Install Dependencies**:
+     - In your project directory, install the required dependencies:
+       ```bash
+       pip install -r requirements.txt
+       ```
+3. **Python**: 
+     - Ensure you have Python installed on your machine. Download it from [python.org](https://www.python.org/).
+
+### Execute the Tests
+Tests have been set up and can be run in various ways:
+
+#### 1. From PyCharm:
+
+     - If you are using PyCharm as your IDE, you can run the tests directly from the IDE's configuration settings:
+     
+        - Open PyCharm and navigate to the `Run` menu.
+        - Run the tests or specific test, from the existing configurations.
+
+#### 2. Through the Terminal:
+
+     - You can also run the tests from the terminal using standard testing commands. Make sure the virtual environment is activated before running the tests.
 
