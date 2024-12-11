@@ -286,5 +286,68 @@ def test_timeout_exception(self, driver):
 
 - **assert**: Verifies that the second input field is displayed after clicking the "Add" button.
 
-### Summary
+#### Summary
 The `TestExceptions` class contains a series of tests designed to handle and verify different Selenium exceptions while interacting with a practice test page. Each test case focuses on a specific exception type, ensuring robust handling of various potential issues in web automation.
+
+### Positive Login Scenarios
+This file contains test cases to validate the positive login functionality of a web application using Selenium WebDriver and pytest. It verifies that a user can successfully log in with valid credentials and checks the presence of expected elements on the post-login page.
+
+#### Class: TestPositiveLogin
+The `TestPositiveLogin` class includes test methods to confirm the successful login process for a user with valid credentials. It performs various assertions to ensure the login process works as intended and that the necessary elements are present on the page after login.
+
+#### 1. test_positive_login
+The `test_positive_login` function verifies the positive login scenario. It navigates to the practice test login page, enters valid credentials, submits the form, and verifies that the user is redirected to the success page with the expected text and logout button.
+
+```python
+@pytest.mark.login
+@pytest.mark.positive
+def test_positive_login(self, driver):
+    # Navigate to web page
+    driver.get("https://practicetestautomation.com/practice-test-login/")
+    time.sleep(3)
+
+    # Type username student into Username field
+    username_locator = driver.find_element(By.ID, "username")
+    username_locator.send_keys("student")
+
+    # Type password Password123 into Password field
+    password_locator = driver.find_element(By.ID, "password")
+    password_locator.send_keys("Password123")
+
+    # Push Submit button
+    submit_button_locator = driver.find_element(By.ID, "submit")
+    submit_button_locator.click()
+    time.sleep(2)
+
+    # Verify new page URL contains practicetestautomation.com/logged-in-successfully/
+    actual_url = driver.current_url
+    assert actual_url == "https://practicetestautomation.com/logged-in-successfully/"
+
+    # Verify new page contains expected text ('Logged In Successfully')
+    text_locator = driver.find_element(By.TAG_NAME, "h1")
+    actual_text = text_locator.text
+    assert actual_text == "Logged In Successfully"
+
+    # Verify button Log out is displayed on the new page
+    log_out_button_locator = driver.find_element(By.LINK_TEXT, "Log out")
+    assert log_out_button_locator.is_displayed()
+```
+
+*Explanation*:
+
+- **driver.get()**: Opens the specified URL in the web browser.
+
+- **time.sleep()**: Pauses the execution for a few seconds to allow the page to load fully.
+
+- **driver.find_element()**: Locates the username and password fields by their IDs and enters the credentials.
+
+- **submit_button_locator.click()**: Clicks the submit button to log in.
+
+- **driver.current_url**: Checks the current URL to ensure it matches the expected success page URL.
+
+- **driver.find_element(By.TAG_NAME, "h1")**: Locates the header element containing the success message and verifies its text.
+
+- **driver.find_element(By.LINK_TEXT, "Log out")**: Locates the logout button and verifies it is displayed.
+
+#### Summary
+The `TestPositiveLogin` class ensures that the login functionality of the web application works correctly with valid credentials. The test verifies the correct redirection to the success page and the presence of expected elements, ensuring the reliability of the login process.
