@@ -510,3 +510,54 @@ def test_negative_password(self, driver):
 
 #### Summary
 The `TestNegativeScenarios` class ensures that the login functionality of the web application correctly handles invalid credentials. The tests verify the correct display of error messages for both invalid usernames and passwords, ensuring that the application's login process is robust and provides appropriate feedback for invalid attempts.
+
+### Math Functions
+This file contains test cases to validate a simple arithmetic function that adds two numbers using pytest. It ensures that the function works correctly for both small and large numbers.
+
+#### Imports
+
+```python
+import pytest
+```
+
+*Explanation*:
+
+- **import pytest**: The pytest framework is used for writing and running the test cases. It provides decorators and utilities to simplify testing.
+
+#### Function: add_two_numbers
+The `add_two_numbers` function takes two arguments, `a` and `b`, and returns their sum.
+
+```python
+def add_two_numbers(a, b):
+    return a + b
+```
+
+#### 1. test_small_numbers
+The `test_small_numbers` function verifies that the `add_two_numbers` function correctly adds small numbers.
+
+```python
+@pytest.mark.math
+def test_small_numbers():
+    assert add_two_numbers(1, 2) == 3, "The sum of 1 and 2 should be 3"
+```
+
+*Explanation*:
+
+- **assert**: Checks that the sum of 1 and 2 equals 3 and raises an error if the condition is not met.
+
+#### 2. test_large_numbers
+The `test_large_numbers` function verifies that the `add_two_numbers` function correctly adds large numbers.
+
+```python
+@pytest.mark.math
+def test_large_numbers():
+    assert add_two_numbers(100, 200) == 300, "The sum of 100 and 200 should be 300"
+```
+
+*Explanation*:
+
+- **assert**: Checks that the sum of 100 and 200 equals 300 and raises an error if the condition is not met.
+
+#### Summary
+This file contains a simple but crucial validation of the `add_two_numbers` function. The tests verify the correctness of the function for both small and large numbers, ensuring that it performs accurately under different conditions.
+
