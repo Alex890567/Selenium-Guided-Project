@@ -577,3 +577,14 @@ def test_large_numbers():
 #### Summary
 This file contains a simple but crucial validation of the `add_two_numbers` function. The tests verify the correctness of the function for both small and large numbers, ensuring that it performs accurately under different conditions.
 
+### Testing Markers Configuration
+The .ini file is used to configure and provide descriptions for all the markers utilized in the testing files. These markers help in organizing, categorizing, and selectively running tests based on specific criteria.
+
+#### Purpose of the .ini File
+
+- **Define Markers**: Specifies and describes each marker used in the testing files.
+
+- **Improve Test Management**: Enhances the organization and readability of tests by providing clear descriptions.
+
+- **Selective Test Execution**: Allows running specific groups of tests based on the markers defined.
+
