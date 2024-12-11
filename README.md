@@ -351,3 +351,162 @@ def test_positive_login(self, driver):
 
 #### Summary
 The `TestPositiveLogin` class ensures that the login functionality of the web application works correctly with valid credentials. The test verifies the correct redirection to the success page and the presence of expected elements, ensuring the reliability of the login process.
+
+### Negative Login Scenarios
+This file contains test cases to validate the negative login scenarios of a web application using Selenium WebDriver and pytest. It verifies that the application correctly handles invalid login attempts with incorrect usernames and passwords, displaying appropriate error messages.
+
+#### Imports
+
+```python
+import time
+import pytest
+from selenium.webdriver.common.by import By
+```
+
+*Explanation*:
+
+- **import time**: The time module is used to add delays in the test execution. This can help to wait for elements to load or actions to complete.
+
+- **import pytest**: The pytest framework is used for writing and running the test cases. It provides decorators and utilities to simplify testing.
+
+- **from selenium.webdriver.common.by import By**: The By class is used to locate elements on a web page. It provides various locating strategies, such as ID, XPath, Name, etc.
+
+#### Class: TestNegativeScenarios
+The `TestNegativeScenarios` class includes test methods to confirm the application's response to invalid login attempts. It ensures that incorrect usernames and passwords are properly handled, and the expected error messages are displayed.
+
+#### 1. test_negative_login
+The `test_negative_login` function verifies the negative login scenario for both invalid username and invalid password. It uses parameterization to test different combinations of usernames and passwords, checking the corresponding error messages.
+
+```python
+@pytest.mark.login
+@pytest.mark.negative
+@pytest.mark.parametrize("username, password, expected_error_message",
+                         [("incorrectUser", "Password123", "Your username is invalid!"),
+                          ("student", "incorrectPassword", "Your password is invalid!")])
+def test_negative_login(self, driver, username, password, expected_error_message):
+    # Navigate to web page
+    driver.get("https://practicetestautomation.com/practice-test-login/")
+    time.sleep(3)
+
+    # Type username into Username field
+    username_locator = driver.find_element(By.ID, "username")
+    username_locator.send_keys(username)
+
+    # Type password into Password field
+    password_locator = driver.find_element(By.ID, "password")
+    password_locator.send_keys(password)
+
+    # Push Submit button
+    submit_button_locator = driver.find_element(By.ID, "submit")
+    submit_button_locator.click()
+    time.sleep(2)
+
+    # Verify error message is displayed
+    error_message_locator = driver.find_element(By.ID, "error")
+    assert error_message_locator.is_displayed(), "Error message is not displayed but it should"
+
+    # Verify error message text
+    error_message = error_message_locator.text
+    assert error_message == expected_error_message, f"Error message should be: '{expected_error_message}'"
+```
+
+*Explanation*:
+
+- **driver.get()**: Opens the specified URL in the web browser.
+
+- **time.sleep()**: Pauses the execution for a few seconds to allow the page to load fully.
+
+- **driver.find_element()**: Locates the username and password fields by their IDs and enters the provided credentials.
+
+- **submit_button_locator.click()**: Clicks the submit button to attempt login.
+
+- **assert**: Checks that the error message is displayed and matches the expected text.
+
+#### 2. test_negative_username
+The `test_negative_username` function verifies the login attempt with an incorrect username. It checks that the appropriate error message is displayed when the username is invalid.
+
+```python
+def test_negative_username(self, driver):
+    # Navigate to web page
+    driver.get("https://practicetestautomation.com/practice-test-login/")
+    time.sleep(3)
+
+    # Type username incorrectUser into Username field
+    username_locator = driver.find_element(By.ID, "username")
+    username_locator.send_keys("incorrectUser")
+
+    # Type password Password123 into Password field
+    password_locator = driver.find_element(By.ID, "password")
+    password_locator.send_keys("Password123")
+
+    # Push Submit button
+    submit_button_locator = driver.find_element(By.ID, "submit")
+    submit_button_locator.click()
+    time.sleep(2)
+
+    # Verify error message is displayed
+    error_message_locator = driver.find_element(By.ID, "error")
+    assert error_message_locator.is_displayed(), "Error message is not displayed but it should"
+
+    # Verify error message text
+    error_message = error_message_locator.text
+    assert error_message == "Your username is invalid!", "Error message should be: 'Your username is invalid!'"
+```
+
+*Explanation*:
+
+- **driver.get()**: Opens the specified URL in the web browser.
+
+- **time.sleep()**: Pauses the execution for a few seconds to allow the page to load fully.
+
+- **driver.find_element()**: Locates the username and password fields by their IDs and enters the credentials.
+
+- **submit_button_locator.click()**: Clicks the submit button to attempt login.
+
+- **assert**: Checks that the error message is displayed and matches the expected text.
+
+#### 3. test_negative_password
+The `test_negative_password` function verifies the login attempt with an incorrect password. It checks that the appropriate error message is displayed when the password is invalid.
+
+```python
+def test_negative_password(self, driver):
+    # Navigate to web page
+    driver.get("https://practicetestautomation.com/practice-test-login/")
+    time.sleep(3)
+
+    # Type username student into Username field
+    username_locator = driver.find_element(By.ID, "username")
+    username_locator.send_keys("student")
+
+    # Type password incorrectPassword into Password field
+    password_locator = driver.find_element(By.ID, "password")
+    password_locator.send_keys("incorrectPassword")
+
+    # Push Submit button
+    submit_button_locator = driver.find_element(By.ID, "submit")
+    submit_button_locator.click()
+    time.sleep(2)
+
+    # Verify error message is displayed
+    error_message_locator = driver.find_element(By.ID, "error")
+    assert error_message_locator.is_displayed(), "Error message is not displayed but it should"
+
+    # Verify error message text
+    error_message = error_message_locator.text
+    assert error_message == "Your password is invalid!", "Error message should be: 'Your password is invalid!'"
+```
+
+*Explanation*:
+
+- **driver.get()**: Opens the specified URL in the web browser.
+
+- **time.sleep()**: Pauses the execution for a few seconds to allow the page to load fully.
+
+- **driver.find_element()**: Locates the username and password fields by their IDs and enters the credentials.
+
+- **submit_button_locator.click()**: Clicks the submit button to attempt login.
+
+- **assert**: Checks that the error message is displayed and matches the expected text
+
+#### Summary
+The `TestNegativeScenarios` class ensures that the login functionality of the web application correctly handles invalid credentials. The tests verify the correct display of error messages for both invalid usernames and passwords, ensuring that the application's login process is robust and provides appropriate feedback for invalid attempts.
