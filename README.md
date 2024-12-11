@@ -218,3 +218,73 @@ def test_invalid_element_state_exception(self, driver):
 - **WebDriverWait**: Waits for the confirmation element to be visible.
 
 - **assert**: Verifies that the confirmation text "Row 1 was saved" appears.
+
+#### 4. test_stale_element_reference_exception
+The `test_stale_element_reference_exception` function verifies the handling of `StaleElementReferenceException`. It navigates to the practice test page, locates the "instructions" text element, clicks the "Add" button to add a new row, and verifies that the "instructions" text element is no longer displayed.
+
+```python
+@pytest.mark.exceptions
+@pytest.mark.stale_element_reference_exception
+def test_stale_element_reference_exception(self, driver):
+    # Open page
+    driver.get("https://practicetestautomation.com/practice-test-exceptions/")
+
+    # Find the instructions text element
+    instructions_text_element_locator = driver.find_element(By.ID, "instructions")
+    assert instructions_text_element_locator.text == "Push 'Add' button to add another row", "Instructions text element does not apply"
+
+    # Push add button
+    add_button_locator = driver.find_element(By.ID, "add_btn")
+    add_button_locator.click()
+
+    # Verify instruction text element is no longer displayed
+    wait = WebDriverWait(driver, 10)
+    assert wait.until(expected_conditions.invisibility_of_element_located((By.ID, "instructions"))), "Instruction text element should no longer be displayed"
+```
+
+*Explanation*:
+
+- **driver.get()**: Opens the specified URL in the web browser.
+
+- **driver.find_element()**: Locates the "instructions" text element by its ID and verifies its text.
+
+- **driver.find_element()**: Locates the "Add" button by its ID and clicks it.
+
+- **WebDriverWait**: Waits up to 10 seconds for the "instructions" text element to become invisible.
+
+- **assert**: Verifies that the "instructions" text element is no longer displayed after clicking the "Add" button.
+
+#### 5. test_timeout_exception
+The `test_timeout_exception` function verifies the handling of `TimeoutException`. It navigates to the practice test page, clicks the "Add" button to add a new row, waits for the second input field to be displayed, and verifies its visibility.
+
+```python
+@pytest.mark.exceptions
+@pytest.mark.timeout_exception
+def test_timeout_exception(self, driver):
+    # Open page
+    driver.get("https://practicetestautomation.com/practice-test-exceptions/")
+
+    # Click Add button
+    add_button_locator = driver.find_element(By.ID, "add_btn")
+    add_button_locator.click()
+
+    # Wait for 3 seconds for the second input field to be displayed
+    wait = WebDriverWait(driver, 10)
+    assert wait.until(expected_conditions.visibility_of_element_located((By.XPATH, "(//input[@class='input-field'])[2]")))
+
+    row2_input_field_locator = driver.find_element(By.XPATH, "//div[@id='row2']/input")
+    assert row2_input_field_locator.is_displayed(), "Row 2 input field should be displayed"
+```
+
+*Explanation*:
+
+- **driver.get()**: Opens the specified URL in the web browser.
+
+- **driver.find_element()**: Locates the "Add" button by its ID and clicks it.
+
+- **WebDriverWait**: Waits up to 10 seconds for the second input field to become visible.
+
+- **assert**: Verifies that the second input field is displayed after clicking the "Add" button.
+
+### Summary
+The `TestExceptions` class contains a series of tests designed to handle and verify different Selenium exceptions while interacting with a practice test page. Each test case focuses on a specific exception type, ensuring robust handling of various potential issues in web automation.
