@@ -602,18 +602,24 @@ Instructions on how to set and run the tests
 ### Prerequisites
 1. **Clone the Repository**: 
      - Clone the repository to your local machine:
+
        ```bash 
-       git clone (link)
+       git clone https://github.com/Alex890567/Selenium-Guided-Project.git
        ```
+
      - Navigate to the Repository Directory:
+
        ```bash
-        cd directory
+        cd Selenium-Guided-Project
        ```
+
 2. **Install Dependencies**:
+
      - In your project directory, install the required dependencies:
        ```bash
        pip install -r requirements.txt
        ```
+
 3. **Python**: 
      - Ensure you have Python installed on your machine. Download it from [python.org](https://www.python.org/).
 
